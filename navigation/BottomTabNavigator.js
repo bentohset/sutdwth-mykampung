@@ -1,8 +1,8 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { Icon } from '@rneui/themed';
 
-import HomeStack from './HomeStack'
 import AnnouncementStack from './AnnouncementStack'
 import GroupsStack from './GroupsStack'
 import ProfileStack from './ProfileStack'
@@ -14,12 +14,31 @@ const BottomTabNavigator = () => {
     <Tab.Navigator
         screenOptions={{
             headerShown: false,
+            tabBarShowLabel: false,
+            tabBarActiveTintColor: '#000',
         }}
     >
-        <Tab.Screen name="Home" component={HomeStack}/>
-        <Tab.Screen name="Announcements" component={AnnouncementStack}/>
-        <Tab.Screen name="Groups" component={GroupsStack}/>
-        <Tab.Screen name="Profile" component={ProfileStack}/>
+        <Tab.Screen name="Announcements" component={AnnouncementStack}
+            options={{
+                tabBarIcon: ({focused, color, size})=>(
+                    <Icon type="material-community" name={focused ? "home" : "home-outline"} color={color} size={size}/>
+                ),
+            }}
+        />
+        <Tab.Screen name="Groups" component={GroupsStack}
+            options={{
+                tabBarIcon: ({focused, color, size})=>(
+                    <Icon type="material-community" name={focused ? "account-group" : "account-group-outline"} color={color} size={size}/>
+                ),
+            }}
+        />
+        <Tab.Screen name="Profile" component={ProfileStack}
+            options={{
+                tabBarIcon: ({focused, color, size})=>(
+                    <Icon type="imaterial" name={focused?"person":"person-outline"} color={color} size="30"/>
+                ),
+            }}
+        />
     </Tab.Navigator>
   )
 }
