@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import RootNavigation from './navigation/RootNavigation';
+import StackNavigator from './navigation/StackNavigator';
 
 export default function App() {
   return (
     <NavigationContainer>
-      <RootNavigation/>
+      <StackNavigator/>
     </NavigationContainer>
   );
 }
