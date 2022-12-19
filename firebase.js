@@ -2,8 +2,10 @@ import { initializeApp, getApps } from "firebase/app";
 import firebase from 'firebase/compat/app';
 import { getAuth,createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyB1v6F8vBgmUyCFdHeTnD-7wyUD_pNxMvA",
@@ -11,7 +13,8 @@ const firebaseConfig = {
   projectId: "mykampung-3e569",
   storageBucket: "mykampung-3e569.appspot.com",
   messagingSenderId: "445198162123",
-  appId: "1:445198162123:web:d93de29e8d31a89e3aa34e"
+  appId: "1:445198162123:web:d93de29e8d31a89e3aa34e",
+  storageBucket: "gs://mykampung-3e569.appspot.com",
 };
 
 // Initialize Firebase
@@ -24,6 +27,7 @@ if (!firebase.apps.length){
   const app = initializeApp(firebaseConfig);
   const auth = getAuth();
   const db = getFirestore();
+  const storage = getStorage(app);
   
   
-  export { auth, db , firebase };
+  export { auth, db , firebase, storage };
