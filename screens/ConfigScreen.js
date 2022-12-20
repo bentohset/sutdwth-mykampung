@@ -2,10 +2,9 @@ import { View, Text, TouchableOpacity, TextInput, SafeAreaView } from 'react-nat
 import { useNavigation } from '@react-navigation/native';
 import React, { useState, useContext } from 'react';
 import { getDoc, doc, updateDoc, setDoc, addDoc } from "firebase/firestore";
-import { db } from "../firebase";
-import useAuth from "../hooks/useAuth";
+import { db,firebase } from "../firebase";
+import useAuth from "../hooks/useAuth"; 
 import AppContext from '../components/AppContext';
-
 
 const ConfigureProfileScreen = () => {
   const [fullName, setFullName] = useState('');

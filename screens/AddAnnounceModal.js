@@ -10,7 +10,7 @@ import * as ImagePicker from "expo-image-picker";
 
 import { db, storage } from "../firebase";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { doc, updateDoc, setDoc, addDoc, serverTimestamp} from "firebase/firestore";
+import { doc, updateDoc, setDoc, getDoc, serverTimestamp} from "firebase/firestore";
 
 
 const AddAnnounceModal = () => {
@@ -68,6 +68,14 @@ const AddAnnounceModal = () => {
         return url;
     }
 
+    const getPostalCode = async () =>{
+        const docRef = doc(db, "users", user.uid)
+        const docSnap = await getDoc(docRef);
+        console.log(docSnap.data().postal_code)
+        
+        return docSnap.data().postal_code;
+    }
+
     async function submitForm(){
         if (name===''){
             setError('Name required');
@@ -82,13 +90,14 @@ const AddAnnounceModal = () => {
             return;
         }
         const url = await uploadImage()
-
+        const postalcode = await getPostalCode()
         let obj = {
             name: name,
             announce_type: typeValue,
             description: desc,
-            user: user.email,
+            user: user.uid,
             photoURL: url,
+            postal: postalcode,
             time: serverTimestamp(),
         }
         const announceRef = doc(db,"announcements", name);
