@@ -34,7 +34,7 @@ const GroupsScreen = () => {
           </View>
 
           <View className="mt-9">
-            <TouchableOpacity className="flex justify-center bg-black active:bg-zinc-700 font-bold rounded-2xl h-28 w-60" onPress={() => Linking.openURL("https://chat.whatsapp.com/E5JZ1fmL2W45IRXKOCT2Mr")}>
+            <TouchableOpacity className="flex justify-center bg-[#5b5b5b] active:bg-zinc-700 font-bold rounded-2xl h-28 w-60" onPress={() => Linking.openURL("https://chat.whatsapp.com/E5JZ1fmL2W45IRXKOCT2Mr")}>
             <Image className=" bg-white w-10 h-10 absolute ml-10" source={require('../assets/groupsScreen/car-sharing.png')} />
               <Text className = "text-white text-2xl text-center ml-12">
                 Car Pooling
