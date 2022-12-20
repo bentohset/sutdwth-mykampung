@@ -166,7 +166,7 @@ const AddAnnounceModal = () => {
                     placeholderTextColor="gray"
                 />
 
-                <Text className="font-semibold m-1 text-xl">Pic</Text>
+                <Text className="font-semibold m-1 text-xl">Add Picture</Text>
                 <TouchableWithoutFeedback onPress={pickImage} className="">
                     {image===null ?  
                     <View className="w-full aspect-square bg-[#D9D9D9] rounded-xl m-2 p-4 border-box flex items-center justify-center">
