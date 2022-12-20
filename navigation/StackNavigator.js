@@ -3,14 +3,17 @@ import React from 'react'
 import useAuth from "../hooks/useAuth";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from '../screens/LoginScreen';
-import BottomTabNavigator from './BottomTabNavigator';
+//import BottomTabNavigator from './BottomTabNavigator';
 import RegistrationScreen from '../screens/RegistrationScreen';
+import AnnouncementScreen from '../screens/AnnouncementScreen';
+import ProfileScreen from '../screens/ProfileScreen';
+import ConfigureProfileScreen from '../screens/ConfigScreen';
 
 const Stack = createNativeStackNavigator();
 
 
 const StackNavigator = () => {
-  const {user} = useAuth();
+  const {user, configState} = useAuth();
 
   return(
     <Stack.Navigator
@@ -18,18 +21,25 @@ const StackNavigator = () => {
         headerShown: false,
       }}
     >
-      {user ?
-      (
-        <>
-          <Stack.Screen name="Tab" component={BottomTabNavigator}/>
-        </>
-      ):(
-        <>
-          <Stack.Screen name="Register" component={RegistrationScreen}/>
-          <Stack.Screen name="Login" component={LoginScreen}/>
-        </>
-
-      )}
+      {user ? (
+            configState ? (
+              <>
+                 
+                <Stack.Screen name="Profile" component={ProfileScreen}/>
+              </>
+              ):(
+              <>
+                <Stack.Screen name="Config" component={ConfigureProfileScreen}/>
+            </>
+            )
+          ) : (
+            <>
+               <Stack.Screen name="Registration" component = {RegistrationScreen} />
+              <Stack.Screen name="Login" component={LoginScreen} />
+              
+              
+            </>
+          )}
     </Stack.Navigator>
   )
 }

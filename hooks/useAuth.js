@@ -7,8 +7,10 @@ import {
   signOut,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
+import { getDoc ,doc, setDoc, addDoc, onSnapshot } from 'firebase/firestore';
 
 const AuthContext = createContext({});
+
 
 export const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
@@ -18,6 +20,7 @@ export const AuthProvider = ({children}) => {
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [configState, setConfigstate] = useState(false);
 
     useEffect(
         () =>
@@ -39,9 +42,27 @@ export const AuthProvider = ({children}) => {
         []
     );
 
+    async function configurationState() {
+      if (user ){
+        //if user is logged in
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setConfigstate(true);
+          console.log("exists")
+        }
+        else{
+          setConfigstate(false);
+          console.log("dun exists")
+        }
+        console.log(configState)
+    }}
+    
+  configurationState();
+
     const logout = () => {
         setLoading(true);
-        setConfigstate(false);
+       
         signOut(auth)
           .catch(error => setError(error))
           .finally(() => setLoading(false));
@@ -73,6 +94,8 @@ export const AuthProvider = ({children}) => {
           error,
           registerUser,
           logout,
+          configState,
+          configurationState,
         }}>
           {!loadingInitial && children}
         </AuthContext.Provider>

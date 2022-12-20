@@ -81,8 +81,12 @@ const Registration = () => {
                 <TouchableOpacity
                     onPress={()=>{
                         registration();
-                        
-                    }}
+                     
+                        <View>
+                            <Text>Ur account has been created, please log in!</Text>
+                        </View>
+                       }
+                    }
                     className="bg-[#5b5b5b] w-5/6 p-4 rounded-2xl"
                 >
                     <Text className="text-white text-center font-semibold">Create account</Text>
