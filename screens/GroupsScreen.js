@@ -1,7 +1,23 @@
 import { View, Text, TouchableOpacity, Linking, SafeAreaView, Image } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
+import { doc, getDoc } from "firebase/firestore";
+import { db } from '../firebase';
+import useAuth from '../hooks/useAuth';
+
 
 const GroupsScreen = () => {
+  const {user} = useAuth();
+  const [postal, setPostal] = useState('');
+
+  const getPostalCode = async () =>{
+    const docRef = doc(db, "users", user.uid)
+    const docSnap = await getDoc(docRef);
+
+    return setPostal(docSnap.data().postal_code);
+  }
+
+  getPostalCode();
+
   return (
     <SafeAreaView className="bg-white flex-1">
 
@@ -13,12 +29,12 @@ const GroupsScreen = () => {
           <View className="mt-11">
             <TouchableOpacity className="flex justify-center bg-[#5b5b5b] active:bg-zinc-700 font-bold rounded-2xl h-28 w-60" onPress={() => Linking.openURL("https://chat.whatsapp.com/E5JZ1fmL2W45IRXKOCT2Mr")}>  
               <Image className=" bg-white w-10 h-10 absolute ml-8" source={require('../assets/groupsScreen/fast-delivery.png')} />
-              <Text className = "text-white text-2xl text-center ml-12">Food Sharing</Text>
+              <Text className = "text-white text-2xl text-center ml-12">Food Sharing </Text>
             </TouchableOpacity>
           </View>
 
           <View className="mt-9">
-            <TouchableOpacity className="flex justify-center bg-[#5b5b5b] active:bg-zinc-700 font-bold rounded-2xl h-28 w-60" onPress={() => Linking.openURL("https://chat.whatsapp.com/E5JZ1fmL2W45IRXKOCT2Mr")}>
+            <TouchableOpacity className="flex justify-center bg-black active:bg-zinc-700 font-bold rounded-2xl h-28 w-60" onPress={() => Linking.openURL("https://chat.whatsapp.com/E5JZ1fmL2W45IRXKOCT2Mr")}>
             <Image className=" bg-white w-10 h-10 absolute ml-10" source={require('../assets/groupsScreen/car-sharing.png')} />
               <Text className = "text-white text-2xl text-center ml-12">
                 Car Pooling
