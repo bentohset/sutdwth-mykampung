@@ -8,6 +8,8 @@ import RegistrationScreen from '../screens/RegistrationScreen';
 import AnnouncementScreen from '../screens/AnnouncementScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import ConfigureProfileScreen from '../screens/ConfigScreen';
+import SettingScreen from '../screens/SettingScreen';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -25,7 +27,11 @@ const StackNavigator = () => {
             configState ? (
               <>
                  
+
+
+
                 <Stack.Screen name="Tabs" component={BottomTabNavigator}/>
+
               </>
               ):(
               <>
