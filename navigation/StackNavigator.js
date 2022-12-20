@@ -3,7 +3,7 @@ import React from 'react'
 import useAuth from "../hooks/useAuth";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from '../screens/LoginScreen';
-//import BottomTabNavigator from './BottomTabNavigator';
+import BottomTabNavigator from './BottomTabNavigator';
 import RegistrationScreen from '../screens/RegistrationScreen';
 import AnnouncementScreen from '../screens/AnnouncementScreen';
 import ProfileScreen from '../screens/ProfileScreen';
@@ -25,7 +25,7 @@ const StackNavigator = () => {
             configState ? (
               <>
                  
-                <Stack.Screen name="Profile" component={ProfileScreen}/>
+                <Stack.Screen name="Tabs" component={BottomTabNavigator}/>
               </>
               ):(
               <>
