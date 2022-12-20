@@ -9,6 +9,7 @@ import { doc, collection, onSnapshot, orderBy, getDoc, query, where } from "fire
 const AnnouncementScreen = () => {
   const {user} = useAuth();
   const navigation = useNavigation();
+  
   const [announce, setAnnounce] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState(null);
