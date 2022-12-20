@@ -1,42 +1,71 @@
-import { View, Text, SafeAreaView, TouchableWithoutFeedback, FlatList, Image } from 'react-native'
-import React from 'react'
+import { View, Text, SafeAreaView, TouchableWithoutFeedback, FlatList, Image, RefreshControl } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { Icon } from '@rneui/base'
 import { useNavigation } from '@react-navigation/native'
-
-const DUMMY_DATA = [
-  {
-      name:"NO Peeing in Lift!!",
-      type: "Warning",
-      desc: "Pls be considerate and not pee in life",
-      photoURL:"https://github.com/twbs.png",
-      id: 1,
-  },
-  {
-      name:"Construction along corridoor",
-      type: "Notices",
-      desc: "There will be construction along level 5",
-      photoURL:"https://github.com/npm.png?size=200",
-      id: 2,
-  },
-  {
-      name:"Christmas Wonderland",
-      type: "Event",
-      desc: "Come down for a fun time building snowmen",
-      photoURL:"https://github.com/github.png?size=40",
-      id:3,
-  }
-];
+import { auth, firebase, db } from '../firebase';
+import useAuth from "../hooks/useAuth";
+import { doc, collection, onSnapshot, orderBy, getDoc, query, where } from "firebase/firestore";
 
 const AnnouncementScreen = () => {
+  const {user} = useAuth();
   const navigation = useNavigation();
+  const [announce, setAnnounce] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
+  const [error, setError] = useState(null);
+  const [postal, setPostal] = useState('');
+
+  const getPostalCode = async () =>{
+    const docRef = doc(db, "users", user.uid)
+    const docSnap = await getDoc(docRef);
+
+    return setPostal(docSnap.data().postal_code);
+  }
+  getPostalCode()
+
+  const fetchData = () => {
+    onSnapshot(query(collection(db,"announcements"),orderBy("time", "desc"),where("postal","==",postal)),snapshot=>{
+      setAnnounce(
+        snapshot.docs.map(doc => ({
+          id:doc.id,
+          ...doc.data(),
+        }))
+      )
+    })
+  }
+
+  useEffect(() => {
+    let unsub;
+    const fetchCards = async () => {
+      unsub = onSnapshot(query(collection(db,"announcements"),orderBy("time", "desc"),where("postal","==",postal)),snapshot=>{
+        setAnnounce(
+          snapshot.docs.map(doc => ({
+            id:doc.id,
+            ...doc.data(),
+          }))
+        )
+      })
+    }
+    fetchCards();
+    return unsub;
+  },[])
+
+
+  const onRefresh = () => {
+    setRefreshing(true)
+    setAnnounce([])
+    fetchData()
+    setRefreshing(false)
+    console.log("refreshed")
+  }
 
   const renderItem = ({ item }) => {
     return (
       <View className="flex-1 bg-white rounded-xl mb-4 p-4">
         {item.photoURL ? (<Image source={{uri:item.photoURL}} className="aspect-square w-full rounded-t-xl"/>):(<View></View>)}
-        <Text className="text-xl font-bold">{item.name}</Text>
-        <Text className="text-zinc-400 text-lg">{item.type}</Text>
-        <Text className="text-lg">{item.desc}</Text>
+        <Text className="text-2xl font-bold mt-1">{item.name}</Text>
+        <Text className="text-zinc-400 text-lg">{item.announce_type}</Text>
+        <Text className="text-lg">{item.description}</Text>
+        <Text className="text-zinc-400 mt-1">Postal Code: {item.postal}</Text>
       </View>
     )
   };
@@ -52,9 +81,10 @@ const AnnouncementScreen = () => {
 
       <View className="flex-1 p-4">
         <FlatList
-          data={DUMMY_DATA}
+          data={announce}
           keyExtractor={item => item.id.toString()}
           renderItem={renderItem}
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         />
       </View>
 
