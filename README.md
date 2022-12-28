@@ -4,7 +4,7 @@
 # myKampung App with React Native
 <p>
     Bringing the heart of the village online</br>
-    SUTD What the Hack 2022 Hackathon Submission - Social  Activities & Games
+    <a href="https://www.sutdwth.com/">SUTD What the Hack 2022 Hackathon </a> Submission - Social  Activities & Games
 </p>
 
 </div>
