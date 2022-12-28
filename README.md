@@ -42,7 +42,7 @@ With this app, we can bring back the Kampung Spirit of togetherness as some thin
 
 <!-- Tech Stack -->
 ### Tech Stack
-<detalis>
+<details>
     <summary>Client</summary>
     <ul>
         <li>
@@ -64,7 +64,7 @@ With this app, we can bring back the Kampung Spirit of togetherness as some thin
             <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/tailwindcss/tailwindcss-plain.svg" alt="TailwindCSS" width="20" height="20" style="vertical-align:middle" />
         </li>
     </ul>
-</detalis>
+</details>
 <detalis>
     <summary>Database</summary>
     <ul>
