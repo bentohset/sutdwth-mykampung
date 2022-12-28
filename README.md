@@ -65,7 +65,7 @@ With this app, we can bring back the Kampung Spirit of togetherness as some thin
         </li>
     </ul>
 </details>
-<detalis>
+<details>
     <summary>Database</summary>
     <ul>
         <li>
@@ -73,7 +73,7 @@ With this app, we can bring back the Kampung Spirit of togetherness as some thin
             <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/firebase/firebase-plain.svg" alt="" width="20" height="20" style="vertical-align:middle" />
         </li>
     </ul>
-</detalis>
+</details>
 
 <!-- Features with screenshots -->
 ### Features of the App
