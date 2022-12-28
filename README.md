@@ -38,7 +38,18 @@ With this app, we can bring back the Kampung Spirit of togetherness as some thin
 
 <!-- Project Scope -->
 ### Scope
-<p>?? </br>IDK WHAT TO ADD HERE OR NEED ANOT?</p>
+<p>
+    React Native App - 
+    <strong>Navigation Structure, Authentication Flow, Screens</strong>
+</p>
+<p>
+    Database Backend - 
+    <strong>Firebase Integration, Email Authentication, User Details, Announcement Storage, Profiles</strong>
+</p>
+<p>
+    Groups - 
+    <strong>Chat Groups, Link Provider</strong>
+</p>
 
 <!-- Tech Stack -->
 ### Tech Stack
