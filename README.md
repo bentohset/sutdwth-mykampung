@@ -46,10 +46,6 @@ With this app, we can bring back the Kampung Spirit of togetherness as some thin
     Database Backend - 
     <strong>Firebase Integration, Email Authentication, User Details, Announcement Storage, Profiles</strong>
 </p>
-<p>
-    Groups - 
-    <strong>Chat Groups, Link Provider</strong>
-</p>
 
 <!-- Tech Stack -->
 ### Tech Stack
